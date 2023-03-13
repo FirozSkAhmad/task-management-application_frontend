@@ -34,19 +34,20 @@ function Home() {
     }
 
     async function deleteTask(id, title) {
-        alert(`Are you sure, do you want to delete ${title} task` )
-        const userId = localStorage.getItem("userId")
-        const body = { userId }
-        let options = {
-            url: `${process.env.REACT_APP_DELETE_TASK_URL}/${id}`,
-            method: "PUT",
-            headers: {
-                authorization: localStorage.getItem('token'),
-            },
-            data: body
+        if (window.confirm(`Are you sure, do you want to delete ${title} task`)) {
+            const userId = localStorage.getItem("userId")
+            const body = { userId }
+            let options = {
+                url: `${process.env.REACT_APP_DELETE_TASK_URL}/${id}`,
+                method: "PUT",
+                headers: {
+                    authorization: localStorage.getItem('token'),
+                },
+                data: body
+            }
+            await axios(options)
+            getData()
         }
-        await axios(options)
-        getData()
     }
 
     async function updateStatus(id) {
