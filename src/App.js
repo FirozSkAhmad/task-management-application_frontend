@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+
+import Login from './Components/Login';
+import Register from "./Components/Register";
+import Home from './Components/Home';
+import AddTask from './Components/AddTask';
+import Protucted from './Components/Protucted';
+import UpdateTask from './Components/UpdateTask';
+import CompletedTasks from './Components/CompletedTasks'
+import TaskNSettings from './Components/TaskNSettings'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/login' element={<Protucted Component={Login} />} />
+          <Route path='/register' element={<Protucted Component={Register} />} />
+          <Route path='/addTask' element={<Protucted Component={AddTask} />} />
+          <Route path='/completedTasks' element={<Protucted Component={CompletedTasks} />} />
+          <Route path='/updateTask/:Id' element={<Protucted Component={UpdateTask} />} />
+          <Route path='/TaskNSettings/:Id' element={<Protucted Component={TaskNSettings} />} />
+          <Route path='/' element={<Protucted Component={Home} />} />
+          <Route path='/*' element={<Navigate to="/register" />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
